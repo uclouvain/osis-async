@@ -1,0 +1,18 @@
+from rest_framework import serializers
+
+from osis_async.models import AsyncTask
+
+
+class AsyncTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AsyncTask
+        fields = [
+            "uuid",
+            "name",
+            "description",
+            "state",
+            "progression",
+            "created_at",
+            "started_at",
+            "completed_at",
+        ]
