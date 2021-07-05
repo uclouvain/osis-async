@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Global component No Async Tasks 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-download"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+       
+    </ul>
+  </li>
+</ul>
+`;
+
+exports[`Storyshots Global component With Async Tasks 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-download"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+       
+    </ul>
+  </li>
+</ul>
+`;
+
+exports[`Storyshots Global component With Errors 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-download"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+       
+    </ul>
+  </li>
+</ul>
+`;
