@@ -24,4 +24,4 @@ class AsyncTaskListView(generics.ListAPIView):
     authentication_classes = (SessionAuthentication,)
 
     def get_queryset(self):
-        return super().get_queryset().filter(person__uuid=self.request.user.person.uuid)
+        return super().get_queryset().filter(person_id=self.request.user.person_id)
