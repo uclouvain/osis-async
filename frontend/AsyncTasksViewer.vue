@@ -40,7 +40,7 @@
           :data-count="pendingAsyncTasksCount"
           :class="{'show-count': pendingAsyncTasksCount }"
       >
-        <span class="fas fa-download" />
+        <span class="fas fa-tasks" />
       </div>
     </a>
     <ul
@@ -67,6 +67,18 @@
           :started-at="asyncTask.started_at"
           :completed-at="asyncTask.completed_at"
       />
+      <li
+          v-show="next"
+          class="text-center"
+      >
+        <button
+            type="button"
+            class="btn btn-link"
+            @click="loadMore"
+        >
+          {{ $t('async_task.load_more') }}
+        </button>
+      </li>
     </ul>
   </li>
 </template>
@@ -90,6 +102,8 @@ export default {
   data() {
     return {
       asyncTasks: [],
+      next: false,
+      pageSize: 15,
       error: '',
     };
   },
@@ -100,7 +114,12 @@ export default {
   },
   async mounted() {
     await this.fetchAsyncTasks();
-    this.timer = setInterval(this.fetchAsyncTasks, this.interval * 1000);
+    let interval = this.interval;
+    if (this.pendingAsyncTasksCount > 0) {
+      // in case there is actual pending async task, set the interval to 5 seconds
+      interval = 5;
+    }
+    this.timer = setInterval(this.fetchAsyncTasks, interval * 1000);
     // This next line let the dropdown menu open after clicking inside it. See the bootstrap source code here:
     // https://github.com/twbs/bootstrap/blob/0b9c4a4007c44201dce9a6cc1a38407005c26c86/js/dropdown.js#L160
     jQuery(document).on('click.bs.dropdown.data-api', '.async-tasks-dropdown', e => e.stopPropagation());
@@ -108,18 +127,23 @@ export default {
   methods: {
     fetchAsyncTasks: async function () {
       try {
-        const response = await fetch(this.url);
+        const response = await fetch(`${this.url}?limit=${this.pageSize}`);
         const newAsyncTasks = await response.json();
         this.asyncTasks = newAsyncTasks.results;
+        this.next = 'next' in newAsyncTasks && newAsyncTasks.next != null;
       } catch (error) {
         this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${error.statusText} )`;
       }
+    },
+    loadMore: function () {
+      this.pageSize += 15;
+      this.fetchAsyncTasks();
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #async-tasks-viewer {
   .dropdown-menu {
     padding: 0;
@@ -131,44 +155,44 @@ export default {
   .async-tasks-dropdown {
     min-width: 70vw;
   }
-}
 
-//-------------------------------------------------
-// Code from https://codepen.io/ryanmorr/pen/RPZZjd
-.download {
-  display: inline-block;
-  position: relative;
+  //-------------------------------------------------
+  // Code from https://codepen.io/ryanmorr/pen/RPZZjd
+  .download {
+    display: inline-block;
+    position: relative;
 
-  &::before,
-  &::after {
-    color: #777;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    &::before,
+    &::after {
+      color: #777;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    &::after {  // async tasks count
+      font-family: Arial sans-serif;
+      font-size: 0.8em;
+      font-weight: 700;
+      position: absolute;
+      top: -10px;
+      right: -15px;
+      padding: 1px 3px;
+      line-height: 100%;
+      border: 2px #fff solid;
+      border-radius: 60px;
+      background: #db3434;
+      opacity: 0;
+      content: attr(data-count);
+      transform: scale(0.5);
+      transition: transform, opacity;
+      transition-duration: 0.3s;
+      transition-timing-function: ease-out;
+      color: #fff;
+      z-index: 2;
+    }
+    &.show-count::after {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
-  &::after {  // async tasks count
-    font-family: Arial sans-serif;
-    font-size: 0.8em;
-    font-weight: 700;
-    position: absolute;
-    top: -10px;
-    right: -15px;
-    padding: 1px 3px;
-    line-height: 100%;
-    border: 2px #fff solid;
-    border-radius: 60px;
-    background: #db3434;
-    opacity: 0;
-    content: attr(data-count);
-    transform: scale(0.5);
-    transition: transform, opacity;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
-    color: #fff;
-    z-index: 2;
-  }
-  &.show-count::after {
-    transform: scale(1);
-    opacity: 1;
-  }
+  //-------------------------------------------------
 }
-//-------------------------------------------------
 </style>

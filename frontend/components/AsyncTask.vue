@@ -31,7 +31,7 @@
           {{ name }}
         </span>
         <span class="async-task-date pull-right">
-          <em>{{ startedAt }}</em>
+          <em>{{ asyncDate }}</em>
         </span>
       </div>
       <div class="col-md-12 text-left">
@@ -103,6 +103,15 @@ export default {
     },
     isDone: function () {
       return this.state === 'DONE';
+    },
+    asyncDate: function () {
+      if (this.completedAt) {
+        return `${this.$t('async_task.completed_at')} : ${this.completedAt}`
+      } else if (this.startedAt) {
+        return `${this.$t('async_task.started_at')} : ${this.startedAt}`
+      } else {
+        return `${this.$t('async_task.created_at')} : ${this.createdAt}`
+      }
     },
   },
 };
