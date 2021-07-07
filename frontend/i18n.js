@@ -33,23 +33,23 @@ const messages = {
   en: {
     async_tasks_viewer: {
       error_fetch_async_tasks: 'An error occurred while fetching tasks, please try again later.',
+      load_more: 'Load more',
     },
     async_task: {
       created_at: 'created at',
       started_at: 'started at',
       completed_at: 'completed at',
-      load_more: 'Load more',
     },
   },
   'fr-be': {
     async_tasks_viewer: {
       error_fetch_async_tasks: 'Une erreur s\'est produite lors de la récupération des tâches, veuillez réessayer plus tard.',
+      load_more: 'Afficher plus',
     },
     async_task: {
       created_at: 'créée le',
       started_at: 'débutée le',
       completed_at: 'complétée le',
-      load_more: 'Afficher plus',
     },
   },
 };
