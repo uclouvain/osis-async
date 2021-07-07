@@ -4,6 +4,10 @@ from osis_async.models import AsyncTask
 
 
 class AsyncTaskSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M')
+    started_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M')
+    completed_at = serializers.DateTimeField(format='%d/%m/%Y %H:%M')
+
     class Meta:
         model = AsyncTask
         fields = [
