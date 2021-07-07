@@ -9,10 +9,6 @@ from osis_async.api.serializers import AsyncTaskSerializer
 from osis_async.models import AsyncTask
 
 
-class AsyncTaskSetPagination(LimitOffsetPagination):
-    default_limit = 15
-
-
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class AsyncTaskListView(generics.ListAPIView):
     """Return all the asynchronous tasks associated with a specific user."""
@@ -20,8 +16,8 @@ class AsyncTaskListView(generics.ListAPIView):
     queryset = AsyncTask.objects.all()
     serializer_class = AsyncTaskSerializer
     permission_classes = (IsAuthenticated,)
-    pagination_class = AsyncTaskSetPagination
+    pagination_class = LimitOffsetPagination
     authentication_classes = (SessionAuthentication,)
 
     def get_queryset(self):
-        return super().get_queryset().filter(person_id=self.request.user.person.id)
+        return super().get_queryset().filter(person=self.request.user.person)
