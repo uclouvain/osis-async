@@ -76,7 +76,7 @@
             class="btn btn-link"
             @click="loadMore"
         >
-          {{ $t('async_task_viewer.load_more') }}
+          {{ $t('async_tasks_viewer.load_more') }}
         </button>
       </li>
     </ul>
