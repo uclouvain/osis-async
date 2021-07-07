@@ -36,7 +36,7 @@
       </div>
       <div class="col-md-12 text-left">
         <!-- eslint-disable-next-line --><!-- Disable the vue/no-v-html warning -->
-        <span class="async-task-text" v-html="description"/>
+        <span :class="{ 'font-bold': !isDone }" class="async-task-text" v-html="description"/>
       </div>
       <div class="col-md-12">
         <div class="progress">
@@ -120,6 +120,10 @@ export default {
 <style lang="scss">
 .async-task-dropdown-item {
   padding: 10px;
+
+  .row {
+    margin: 0;
+  }
 
   &:hover {
     background-color: #f5f5f5;

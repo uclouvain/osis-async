@@ -76,7 +76,7 @@
             class="btn btn-link"
             @click="loadMore"
         >
-          {{ $t('async_task.load_more') }}
+          {{ $t('async_task_viewer.load_more') }}
         </button>
       </li>
     </ul>
@@ -150,10 +150,6 @@ export default {
   }
   .alert.alert-warning {
     margin-top: 20px;
-  }
-
-  .async-tasks-dropdown {
-    min-width: 70vw;
   }
 
   //-------------------------------------------------
