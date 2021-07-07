@@ -68,7 +68,7 @@
           :completed-at="asyncTask.completed_at"
       />
       <li
-          v-show="next"
+          v-show="hasNextPage"
           class="text-center"
       >
         <button
@@ -102,7 +102,7 @@ export default {
   data() {
     return {
       asyncTasks: [],
-      next: false,
+      hasNextPage: false,
       pageSize: 15,
       error: '',
     };
@@ -130,11 +130,16 @@ export default {
         const response = await fetch(`${this.url}?limit=${this.pageSize}`);
         const newAsyncTasks = await response.json();
         this.asyncTasks = newAsyncTasks.results;
-        this.next = 'next' in newAsyncTasks && newAsyncTasks.next != null;
+        this.hasNextPage = !!newAsyncTasks.next;
       } catch (error) {
         this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${error.statusText} )`;
       }
     },
+    /**
+     * We use the ?limit to get new tasks when clicking on the 'Load more' button as we need to keep all the previous
+     * tasks and add the new ones. All this will be override by the setInterval that fetch all the async tasks if we
+     * use the ?offset. So it may generate a big request, but it is very unlikely.
+     */
     loadMore: function () {
       this.pageSize += 15;
       this.fetchAsyncTasks();
@@ -143,7 +148,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #async-tasks-viewer {
   .dropdown-menu {
     padding: 0;
