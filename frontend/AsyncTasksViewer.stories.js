@@ -147,7 +147,7 @@ const mockAsyncTasks = {
 
 let mockAsyncTasks2 = {
   count: 22,
-  next: 'mockAsyncTasks2',
+  next: null,
   results: mockAsyncTasks.results.concat([
     {
       uuid: '1445bb87-4965-44a5-0889-1b82f49166ec',
@@ -224,7 +224,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 export const noAsyncTasks = () => {
-  fetchMock.restore().get('/', {count: 0, results: []});
+  fetchMock.restore().get('*', {count: 0, results: []});
   return {
     components: { AsyncTasksViewer },
     template: `<ul class="nav navbar-nav">
@@ -249,7 +249,7 @@ export const withAsyncTasks = () => {
 };
 
 export const withErrors = () => {
-  fetchMock.restore().get('/', { throws: new Error('Failed to fetch') });
+  fetchMock.restore().get('*', { throws: new Error('Failed to fetch') });
 
   return {
     components: { AsyncTasksViewer },
