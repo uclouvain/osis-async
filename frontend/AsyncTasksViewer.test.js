@@ -31,6 +31,16 @@ import Vue from "vue";
 
 jest.mock('./utils.js');
 
+const completedAsyncTask = {
+  name: 'Génération de document',
+  description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
+  state: 'DONE',
+  progression: 100,
+  created_at: '07/06/2021 12:22',
+  started_at: '07/06/2021 14:22',
+  completed_at: '07/06/2021 14:26',
+}
+
 const mockAsyncTasks = {
   count: 1,
   results: [
@@ -110,121 +120,43 @@ describe('component lifecycle', () => {
         completed_at: null,
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f49166ed',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f49166ee',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f49a66ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f39166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f49166ef',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-7889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4905-44a5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82849166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4975-44a5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1425bb87-4965-44a-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1145bb87-4965-44a5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a6-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       },
     ],
   };
@@ -234,67 +166,25 @@ describe('component lifecycle', () => {
     results: mockAsyncTasks2.results.concat([
       {
         uuid: '1445bb87-4965-44a5-0889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1beff49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82fab166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f4b166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44a5-9889-1b82f491decc',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-c4a5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       }, {
         uuid: '1445bb87-4965-44c5-9889-1b82f49166ec',
-        name: 'Génération de document',
-        description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
-        state: 'DONE',
-        progression: 100,
-        created_at: '07/06/2021 12:22',
-        started_at: '07/06/2021 14:22',
-        completed_at: '07/06/2021 14:26',
+        ...completedAsyncTask
       },
     ]),
   }
