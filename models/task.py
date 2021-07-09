@@ -31,6 +31,18 @@ class AsyncTask(models.Model):
             MaxValueValidator(100),
         ],
     )
+    time_to_live = models.IntegerField(
+        _("Time To Live"),
+        help_text=_(
+            "The Time To Live is the duration, in minutes, that the instance of a "
+            "task will have to be completed. Pass this time, the task will be stop "
+            "and errored."
+        ),
+        default=5,
+        validators=[
+            MinValueValidator(0),
+        ],
+    )
 
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     started_at = models.DateTimeField(_("Started at"), editable=False, null=True)
