@@ -40,7 +40,7 @@ exports[`Storyshots Global component No Async Tasks 1`] = `
           type="button"
         >
           
-        async_task_viewer.load_more
+        Load more
       
         </button>
       </li>
@@ -89,7 +89,7 @@ exports[`Storyshots Global component With Async Tasks 1`] = `
           type="button"
         >
           
-        async_task_viewer.load_more
+        Load more
       
         </button>
       </li>
@@ -138,7 +138,7 @@ exports[`Storyshots Global component With Errors 1`] = `
           type="button"
         >
           
-        async_task_viewer.load_more
+        Load more
       
         </button>
       </li>

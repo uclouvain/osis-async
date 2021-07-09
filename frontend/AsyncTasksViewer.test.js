@@ -204,7 +204,7 @@ describe('component lifecycle', () => {
     await Vue.nextTick(); // wait for request
     await Vue.nextTick(); // wait for loading
     await Vue.nextTick(); // wait for re-rendering
-    expect(wrapper.text()).toContain('async_task_viewer.load_more');
+    expect(wrapper.text()).toContain('async_tasks_viewer.load_more');
     expect(wrapper.vm.asyncTasks.length).toBe(15);
     await wrapper.find('button').trigger('click');
     await Vue.nextTick(); // wait for request

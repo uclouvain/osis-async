@@ -98,12 +98,16 @@ export default {
       type: Number,
       default: 300,
     },
+    limit: {
+      type: Number,
+      default: 15,
+    },
   },
   data() {
     return {
       asyncTasks: [],
       hasNextPage: false,
-      pageSize: 15,
+      pageSize: this.limit,
       error: '',
     };
   },
@@ -141,7 +145,7 @@ export default {
      * use the ?offset. So it may generate a big request, but it is very unlikely.
      */
     loadMore: function () {
-      this.pageSize += 15;
+      this.pageSize += this.limit;
       this.fetchAsyncTasks();
     },
   },
