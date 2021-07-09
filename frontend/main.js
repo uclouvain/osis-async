@@ -32,6 +32,9 @@ document.querySelectorAll('#async-tasks-viewer').forEach((elem) => {
   if (typeof props.interval !== 'undefined') {
     props.interval = Number.parseInt(props.interval);
   }
+  if (typeof props.limit !== 'undefined') {
+    props.limit = Number.parseInt(props.limit);
+  }
   new Vue({
     render: (h) => h(AsyncTasksViewer, { props }),
     i18n,
