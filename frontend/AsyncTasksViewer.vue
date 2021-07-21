@@ -68,7 +68,24 @@
           :completed-at="asyncTask.completed_at"
       />
       <li
-          v-show="hasNextPage"
+          v-if="loading"
+          class="progress"
+      >
+        <div
+            class="progress-bar progress-bar-striped active"
+            role="progressbar"
+            aria-valuenow="100"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width: 100%"
+        >
+          <span class="sr-only">
+            Loading
+          </span>
+        </div>
+      </li>
+      <li
+          v-else-if="hasNextPage"
           class="text-center"
       >
         <button
@@ -109,12 +126,9 @@ export default {
       hasNextPage: false,
       pageSize: this.limit,
       error: '',
+      loading: true,
+      pendingAsyncTasksCount: 0,
     };
-  },
-  computed: {
-    pendingAsyncTasksCount: function () {
-      return this.asyncTasks.filter(asyncTask => ['PENDING', 'PROCESSING'].includes(asyncTask.state)).length;
-    },
   },
   async mounted() {
     await this.fetchAsyncTasks();
@@ -135,8 +149,11 @@ export default {
         const newAsyncTasks = await response.json();
         this.asyncTasks = newAsyncTasks.results;
         this.hasNextPage = !!newAsyncTasks.next;
+        this.pendingAsyncTasksCount = newAsyncTasks.pending_count;
       } catch (error) {
         this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${error.statusText} )`;
+      } finally {
+        this.loading = false;
       }
     },
     /**
@@ -144,7 +161,9 @@ export default {
      * tasks and add the new ones. All this will be override by the setInterval that fetch all the async tasks if we
      * use the ?offset. So it may generate a big request, but it is very unlikely.
      */
-    loadMore: function () {
+    loadMore: function (e) {
+       e.stopPropagation();
+      this.loading = true;
       this.pageSize += this.limit;
       this.fetchAsyncTasks();
     },
@@ -154,8 +173,10 @@ export default {
 
 <style lang="scss">
 #async-tasks-viewer {
-  .dropdown-menu {
+  .async-tasks-dropdown {
     padding: 0;
+    overflow-y: scroll;
+    max-height: 320px;
   }
   .alert.alert-warning {
     margin-top: 20px;
