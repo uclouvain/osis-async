@@ -13,6 +13,7 @@ const completedAsyncTask = {
 
 const mockAsyncTasks = {
   count: 22,
+  pending_count: 2,
   next: 'mockAsyncTasks2',
   results: [
     {
@@ -72,15 +73,7 @@ const mockAsyncTasks = {
      },{
       uuid: '1445bb87-4965-44a6-9889-1b82f49166ec',
       ...completedAsyncTask
-     },
-   ],
-};
-
-let mockAsyncTasks2 = {
-  count: 22,
-  next: null,
-  results: mockAsyncTasks.results.concat([
-    {
+     },{
       uuid: '1445bb87-4965-44a5-0889-1b82f49166ec',
       ...completedAsyncTask
     },{
@@ -102,8 +95,8 @@ let mockAsyncTasks2 = {
       uuid: '1445bb87-4965-44c5-9889-1b82f49166ec',
       ...completedAsyncTask
     },
-  ]),
-}
+   ],
+};
 
 if (process.env.NODE_ENV === 'test') {
   // Mock jQuery for snapshots tests
@@ -123,9 +116,17 @@ export const noAsyncTasks = () => {
 };
 
 export const withAsyncTasks = () => {
+  let currentAsyncTaskPage = {...mockAsyncTasks};
   fetchMock.restore()
-   .get('/?limit=15', mockAsyncTasks)
-   .get('/?limit=30', mockAsyncTasks2);
+   .get('/?limit=15', function () {
+     currentAsyncTaskPage.results = mockAsyncTasks.results.slice(0, 15);
+     return currentAsyncTaskPage;
+   })
+   .get('/?limit=30', function () {
+      currentAsyncTaskPage.results = mockAsyncTasks.results;
+      delete currentAsyncTaskPage.next;
+      return currentAsyncTaskPage;
+   });
 
   return {
     components: { AsyncTasksViewer },
