@@ -11,3 +11,4 @@ class AsyncTaskFactory(factory.DjangoModelFactory):
     person = factory.SubFactory(PersonFactory)
     name = factory.Faker("name")
     description = factory.Faker("name")
+    uuid = factory.Faker('uuid4')
