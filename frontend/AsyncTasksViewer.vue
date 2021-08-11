@@ -162,7 +162,7 @@ export default {
      * use the ?offset. So it may generate a big request, but it is very unlikely.
      */
     loadMore: function (e) {
-       e.stopPropagation();
+       e.stopPropagation();  // prevent the dropdown from closing
       this.loading = true;
       this.pageSize += this.limit;
       this.fetchAsyncTasks();
