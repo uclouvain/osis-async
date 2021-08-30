@@ -24,7 +24,7 @@
  *
  */
 module.exports = {
-  outputDir: "static/osis_async",
+  outputDir: "osis_async/static/osis_async",
   configureWebpack(config) {
     // Removes demo.html
     config.plugins.some((plugin, index) => {
