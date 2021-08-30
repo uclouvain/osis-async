@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Global component No Async Tasks 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-tasks"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+        
+      <li
+        class="progress"
+      >
+        <div
+          aria-valuemax="100"
+          aria-valuemin="0"
+          aria-valuenow="100"
+          class="progress-bar progress-bar-striped active"
+          role="progressbar"
+          style="width: 100%;"
+        >
+          <span
+            class="sr-only"
+          >
+            
+          Loading
+        
+          </span>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;
+
+exports[`Storyshots Global component With Async Tasks 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-tasks"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+        
+      <li
+        class="progress"
+      >
+        <div
+          aria-valuemax="100"
+          aria-valuemin="0"
+          aria-valuenow="100"
+          class="progress-bar progress-bar-striped active"
+          role="progressbar"
+          style="width: 100%;"
+        >
+          <span
+            class="sr-only"
+          >
+            
+          Loading
+        
+          </span>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;
+
+exports[`Storyshots Global component With Errors 1`] = `
+<ul
+  class="nav navbar-nav"
+>
+  <li
+    class="dropdown"
+    id="async-tasks-viewer"
+  >
+    <a
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+    >
+      <div
+        class="download"
+        data-count="0"
+      >
+        <span
+          class="fas fa-tasks"
+        />
+      </div>
+    </a>
+     
+    <ul
+      class="dropdown-menu async-tasks-dropdown"
+      style="display: none;"
+    >
+      <!---->
+        
+      <li
+        class="progress"
+      >
+        <div
+          aria-valuemax="100"
+          aria-valuemin="0"
+          aria-valuenow="100"
+          class="progress-bar progress-bar-striped active"
+          role="progressbar"
+          style="width: 100%;"
+        >
+          <span
+            class="sr-only"
+          >
+            
+          Loading
+        
+          </span>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;
