@@ -1,1 +1,2 @@
-exclude osis_async/tests
+recursive-exclude osis_async/tests *
+recursive-include osis_async/static *
