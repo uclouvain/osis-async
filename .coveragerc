@@ -1,9 +1,8 @@
 [run]
 branch = True
-source = osis_async
+source = osis_async/osis_async
 omit =
     */migrations/*
-    venv/*
     */tests/*
     */management/*
     */admin.py

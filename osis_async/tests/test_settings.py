@@ -23,16 +23,8 @@
 #    see http://www.gnu.org/licenses/.
 #
 # ##############################################################################
-from setuptools import setup
 
-setup(
-    name='OSIS Async',
-    version='0.1',
-    description='Asynchronous tasks API and UI',
-    url='http://github.com/uclouvain/osis-async',
-    author='Université catholique de Louvain',
-    author_email='O365G-team-osis-dev@groupes.uclouvain.be',
-    license='AGPLv3',
-    packages=['osis_async'],
-    include_package_data=True,
-)
+SECRET_KEY = 'fake-key'
+INSTALLED_APPS = [
+    "tests",
+]
