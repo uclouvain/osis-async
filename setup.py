@@ -23,7 +23,7 @@
 #    see http://www.gnu.org/licenses/.
 #
 # ##############################################################################
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='OSIS Async',
@@ -33,5 +33,6 @@ setup(
     author='Université catholique de Louvain',
     author_email='O365G-team-osis-dev@groupes.uclouvain.be',
     license='AGPLv3',
-    packages=['osis_async'],
+    packages=find_packages(exclude=('osis_async.tests',)),
+    include_package_data=True,
 )
