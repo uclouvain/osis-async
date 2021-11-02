@@ -19,9 +19,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, unique=True)),
-                ('name', models.CharField(max_length=100, verbose_name='Nom')),
+                ('name', models.CharField(max_length=100, verbose_name='Name')),
                 ('description', models.TextField(verbose_name='Description')),
-                ('state', models.CharField(choices=[('PENDING', 'En attente'), ('PROCESSING', 'Processing'), ('DONE', 'Done')], default='PENDING', max_length=25, verbose_name='État')),
+                ('state', models.CharField(choices=[('PENDING', 'Pending'), ('PROCESSING', 'Processing'), ('DONE', 'Done')], default='PENDING', max_length=25, verbose_name='State')),
                 ('progression', models.IntegerField(default=0, help_text='In percentage', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], verbose_name='Progression')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
                 ('started_at', models.DateTimeField(editable=False, null=True, verbose_name='Started at')),
