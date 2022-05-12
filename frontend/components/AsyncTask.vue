@@ -36,7 +36,7 @@
       </div>
       <div class="col-md-12 text-left">
         <!-- eslint-disable-next-line --><!-- Disable the vue/no-v-html warning -->
-        <span :class="{ 'font-bold': !isDone }" class="async-task-text" v-html="description"/>
+        <span class="async-task-text" v-html="description" />
       </div>
       <div class="col-md-12">
         <div class="progress">
