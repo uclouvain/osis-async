@@ -34,6 +34,8 @@ const messages = {
     async_tasks_viewer: {
       error_fetch_async_tasks: 'An error occurred while fetching tasks, please try again later.',
       load_more: 'Load more',
+      loading: 'Loading',
+      no_results: 'No current tasks.',
     },
     async_task: {
       created_at: 'created at',
@@ -45,6 +47,8 @@ const messages = {
     async_tasks_viewer: {
       error_fetch_async_tasks: 'Une erreur s\'est produite lors de la récupération des tâches, veuillez réessayer plus tard.',
       load_more: 'Afficher plus',
+      loading: 'Chargement',
+      no_results: 'Aucune tâche en cours.',
     },
     async_task: {
       created_at: 'créée le',

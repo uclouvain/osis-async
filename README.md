@@ -35,9 +35,8 @@ Add `osis_async` to `INSTALLED_APPS` and apply migrations :
 
 ```python
 INSTALLED_APPS = (
-    ...
+    ...,
     'osis_async',
-    ...
 )
 ```
 

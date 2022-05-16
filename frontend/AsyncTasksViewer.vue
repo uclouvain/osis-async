@@ -44,7 +44,6 @@
       </div>
     </a>
     <ul
-        v-show="asyncTasks.length || error"
         class="dropdown-menu async-tasks-dropdown"
     >
       <li v-if="error">
@@ -68,8 +67,12 @@
           :completed-at="asyncTask.completed_at"
       />
       <li
-          v-if="loading"
-          class="progress"
+          v-if="!loading && !asyncTasks.length"
+      >
+        {{ $t('async_tasks_viewer.no_results') }}
+      </li>
+      <li
+          v-if="loading" class="progress"
       >
         <div
             class="progress-bar progress-bar-striped active"
@@ -80,7 +83,7 @@
             style="width: 100%"
         >
           <span class="sr-only">
-            Loading
+            {{ $t('async_tasks_viewer.load_more') }}
           </span>
         </div>
       </li>
@@ -174,9 +177,10 @@ export default {
 <style lang="scss">
 #async-tasks-viewer {
   .async-tasks-dropdown {
-    padding: 0;
+    padding: 15px;
     overflow-y: scroll;
     max-height: 320px;
+    min-width: 320px;
   }
   .alert.alert-warning {
     margin-top: 20px;

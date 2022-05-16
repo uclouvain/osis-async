@@ -23,26 +23,19 @@
 #    see http://www.gnu.org/licenses/.
 #
 # ##############################################################################
+from django.urls import path as _path
 
-from rest_framework import serializers
+from osis_async.api.utils import proxy_view
+from osis_async.api.views import AsyncTaskListView
 
-from osis_async.models import AsyncTask
+
+def proxy_path(pattern, view, name=None):
+    name = getattr(view, 'name', name)
+    view = proxy_view(view)
+    return _path(pattern, view, name=name)
 
 
-class AsyncTaskSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M")
-    started_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M")
-    completed_at = serializers.DateTimeField(format="%d/%m/%Y %H:%M")
-
-    class Meta:
-        model = AsyncTask
-        fields = [
-            "uuid",
-            "name",
-            "description",
-            "state",
-            "progression",
-            "created_at",
-            "started_at",
-            "completed_at",
-        ]
+app_name = "osis_async"
+urlpatterns = [
+    proxy_path("", AsyncTaskListView),
+]
