@@ -74,7 +74,7 @@ update_task(uuid, progression=50)
 update_task(uuid, state=TaskStates.DONE.name, completed_at=now())
 ```
 
-# Integrate the front notification component
+# Integrate the front async component
 
 Make the dependencies available:
 ```html
@@ -101,3 +101,10 @@ Then you can integrate the component:
 
  - `data-url` : API endpoint that returns all the tasks.
  - `data-interval` : The interval, in seconds, to fetch tasks from server (default to 300).
+
+# Update the front async component via custom event
+```html
+   <script>
+        let customEvent=new CustomEvent('AsyncTasksViewer:fetchAsyncTasks');
+        document.dispatchEvent(customEvent);
+   </script>
