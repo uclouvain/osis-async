@@ -144,6 +144,7 @@ export default {
     // This next line let the dropdown menu open after clicking inside it. See the bootstrap source code here:
     // https://github.com/twbs/bootstrap/blob/0b9c4a4007c44201dce9a6cc1a38407005c26c86/js/dropdown.js#L160
     jQuery(document).on('click.bs.dropdown.data-api', '.async-tasks-dropdown', e => e.stopPropagation());
+    jQuery(document).on('AsyncTasksViewer:fetchAsyncTasks', () => this.fetchAsyncTasks());
   },
   methods: {
     fetchAsyncTasks: async function () {

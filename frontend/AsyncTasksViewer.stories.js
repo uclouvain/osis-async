@@ -151,6 +151,20 @@ export const withErrors = () => {
   };
 };
 
+export const eventFetchAsyncTasks = () => {
+  fetchMock.restore().get('*', {count: 0, results: []});
+  return {
+    components: { AsyncTasksViewer },
+    template: `<ul class="nav navbar-nav">
+                 <AsyncTasksViewer url="/" />
+                 <button onclick="let customEvent=new CustomEvent('AsyncTasksViewer:fetchAsyncTasks'); document.dispatchEvent(customEvent); "> Refresh via custom event </button>
+               </ul>
+               `,
+  };
+};
+
+
+
 export default {
   title: 'Global component',
 };
