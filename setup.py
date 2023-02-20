@@ -27,7 +27,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='OSIS Async',
-    version='0.1',
+    version='0.2',
     description='Asynchronous tasks API and UI',
     url='http://github.com/uclouvain/osis-async',
     author='Université catholique de Louvain',
