@@ -27,7 +27,7 @@
   <li class="async-task-dropdown-item container">
     <div class="row">
       <div class="col-md-12 text-left">
-        <span :class="{ 'font-bold': !isDone }">
+        <span class="font-bold">
           {{ name }}
         </span>
         <span class="async-task-date pull-right">

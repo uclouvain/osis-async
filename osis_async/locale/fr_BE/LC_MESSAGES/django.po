@@ -18,5 +18,56 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-msgid "The task is being processed. You can keep this window open to see the progress or you can close this window and check the progress at any time via the task menu."
-msgstr "La tâche est en cours de traitement. Vous pouvez garder cette fenêtre ouverte pour voir sa progression en direct ou vous pouvez fermer cette fenêtre et consulter à tout moment la progression via le menu des tâches."
+msgid "Completed at"
+msgstr "Terminée le"
+
+msgid "Created at"
+msgstr "Demandée le"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Done"
+msgstr "Effectué"
+
+msgid "In percentage"
+msgstr "En pourcentage"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Pending"
+msgstr "En attente"
+
+msgid "Processing"
+msgstr "En cours de traitement"
+
+msgid "Progression"
+msgstr "Progression"
+
+msgid "Started at"
+msgstr "Débutée le"
+
+msgid "State"
+msgstr "Etat"
+
+msgid ""
+"The Time To Live is the duration, in minutes, that the instance of a task "
+"will have to be completed. Pass this time, the task will be stop and errored."
+msgstr "La durée de vie est la durée, en minutes, que l'instance d'une tâche "
+"devra être terminée. Passez cette durée, la tâche sera arrêtée et erronée."
+
+msgid ""
+"The task is being processed. You can keep this window open to see the "
+"progress or you can close this window and check the progress at any time via "
+"the task menu."
+msgstr ""
+"La tâche est en cours de traitement. Vous pouvez garder cette fenêtre "
+"ouverte pour voir sa progression en direct ou vous pouvez fermer cette "
+"fenêtre et consulter à tout moment la progression via le menu des tâches."
+
+msgid "Time To Live"
+msgstr "Durée de vie"

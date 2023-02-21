@@ -73,3 +73,6 @@ class AsyncTask(models.Model):
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     started_at = models.DateTimeField(_("Started at"), editable=False, null=True)
     completed_at = models.DateTimeField(_("Completed at"), editable=False, null=True)
+
+    class Meta:
+        ordering = ['-created_at']

@@ -6,7 +6,7 @@
  * The core business involves the administration of students, teachers,
  * courses, programs and so on.
  *
- * Copyright (C) 2015-2022 Université catholique de Louvain (http://www.uclouvain.be)
+ * Copyright (C) 2015-2023 Université catholique de Louvain (http://www.uclouvain.be)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 </script>
 
 <div class="modal-content"
-     {% if not rapport.est_termine %}
+     {% if not task.est_termine %}
          hx-get="{{ request.get_full_path }}"
          hx-trigger="every 3s"
          hx-target="#form-modal-ajax-content"
@@ -37,28 +37,27 @@
 >
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-        <h4 class="text-center">
-            {% block modal_title %}{% endblock modal_title %}
-        </h4>
+        {% block modal_title %}{% endblock modal_title %}
     </div>
     <div class="modal-body">
         <div class="progress">
           <div class="progress-bar
-                    {% if rapport.est_termine %}
+                      progress-bar-striped
+                    {% if task.est_termine %}
                          progress-bar-success
                     {% else %}
-                        progress-bar-striped active
+                        active
                     {% endif %}"
                role="progressbar"
-               aria-valuenow="{{ rapport.progression }}"
+               aria-valuenow="{{ task.progression }}"
                aria-valuemin="0"
                aria-valuemax="100"
-               style="width: {{ rapport.progression }}%">
+               style="width: {{ task.progression }}%">
+              {{ task.progression }}%
           </div>
         </div>
-
-        {% if rapport.est_termine %}
-            {% block async_finished %}{% endblock async_finished %}
+        {% if task.est_termine %}
+            {% block task_finished %}{% endblock task_finished %}
         {% else %}
             <div class="alert alert-info">
                 <span>
@@ -68,6 +67,8 @@
         {% endif %}
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Ok' %}</button>
+        {% block modal_footer %}
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Ok' %}</button>
+        {% endblock %}
     </div>
 </div>

@@ -16,5 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "The task is being processed. You can keep this window open to see the progress or you can close this window and check the progress at any time via the task menu."
+msgid "Completed at"
+msgstr ""
+
+msgid "Created at"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "In percentage"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Processing"
+msgstr ""
+
+msgid "Progression"
+msgstr ""
+
+msgid "Started at"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid ""
+"The Time To Live is the duration, in minutes, that the instance of a task "
+"will have to be completed. Pass this time, the task will be stop and errored."
+msgstr ""
+
+msgid ""
+"The task is being processed. You can keep this window open to see the "
+"progress or you can close this window and check the progress at any time via "
+"the task menu."
+msgstr ""
+
+msgid "Time To Live"
 msgstr ""
