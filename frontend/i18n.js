@@ -51,9 +51,9 @@ const messages = {
       no_results: 'Aucune tâche en cours.',
     },
     async_task: {
-      created_at: 'créée le',
+      created_at: 'demandée le',
       started_at: 'débutée le',
-      completed_at: 'complétée le',
+      completed_at: 'terminée le',
     },
   },
 };
