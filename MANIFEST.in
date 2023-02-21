@@ -1,1 +1,3 @@
 recursive-include osis_async/static *
+recursive-include osis_async/templates *
+recursive-include osis_async/locale *
