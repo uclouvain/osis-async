@@ -27,7 +27,7 @@
   <li class="async-task-dropdown-item container">
     <div class="row">
       <div class="col-md-12 text-left">
-        <span class="font-bold">
+        <span :class="{ 'font-bold': !isDone }">
           {{ name }}
         </span>
         <span class="async-task-date pull-right">
@@ -35,8 +35,10 @@
         </span>
       </div>
       <div class="col-md-12 text-left">
-        <!-- eslint-disable-next-line --><!-- Disable the vue/no-v-html warning -->
-        <span class="async-task-text" v-html="description" />
+        <span
+            class="async-task-text"
+            v-html="description"
+        />
       </div>
       <div class="col-md-12">
         <div class="progress">
@@ -57,9 +59,11 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
+import {defineComponent} from "vue";
+import type {PropType} from "vue";
 
-export default {
+export default defineComponent({
   name: 'AsyncTask',
   props: {
     uuid: {
@@ -87,13 +91,11 @@ export default {
       required: true,
     },
     startedAt: {
-      type: String,
-      required: false,
+      type: String as PropType<string | null>,
       default: null,
     },
     completedAt: {
-      type: String,
-      required: false,
+      type: String as PropType<string | null>,
       default: null,
     },
   },
@@ -106,15 +108,15 @@ export default {
     },
     asyncDate: function () {
       if (this.completedAt) {
-        return `${this.$t('async_task.completed_at')} : ${this.completedAt}`
+        return `${this.$t('async_task.completed_at')} : ${this.completedAt}`;
       } else if (this.startedAt) {
-        return `${this.$t('async_task.started_at')} : ${this.startedAt}`
+        return `${this.$t('async_task.started_at')} : ${this.startedAt}`;
       } else {
-        return `${this.$t('async_task.created_at')} : ${this.createdAt}`
+        return `${this.$t('async_task.created_at')} : ${this.createdAt}`;
       }
     },
   },
-};
+});
 </script>
 
 <style lang="scss">
@@ -139,6 +141,7 @@ export default {
 
   .progress {
     margin-top: 5px;
+
     .progress-bar {
       min-width: 2em;
     }

@@ -1,4 +1,3 @@
-
 /*
  *
  *   OSIS stands for Open Student Information System. It's an application
@@ -27,10 +26,10 @@
 
 
 /**
- * Get the given cookie from it's name. We use it to get the csrftoken.
+ * Get the given cookie from its name. We use it to get the csrftoken.
  * See code from https://docs.djangoproject.com/en/3.2/ref/csrf/#acquiring-the-token-if-csrf-use-sessions-and-csrf-cookie-httponly-are-false
  */
-export function getCookie (name) {
+export function getCookie(name: string) : string | null {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';');

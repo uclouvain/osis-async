@@ -23,20 +23,25 @@
  *   see http://www.gnu.org/licenses/.
  *
  */
-import Vue from 'vue';
-import AsyncTasksViewer from './AsyncTasksViewer';
-import { i18n } from './i18n';
 
-document.querySelectorAll('#async-tasks-viewer').forEach((elem) => {
-  const props = { ...elem.dataset };
-  if (typeof props.interval !== 'undefined') {
-    props.interval = Number.parseInt(props.interval);
-  }
-  if (typeof props.limit !== 'undefined') {
-    props.limit = Number.parseInt(props.limit);
-  }
-  new Vue({
-    render: (h) => h(AsyncTasksViewer, { props }),
-    i18n,
-  }).$mount(elem);
+import {getCookie} from './utils.js';
+import {describe, it, expect} from 'vitest';
+
+describe('cookies are not set', () => {
+  it('should return null', () => {
+    window.document.cookie = '';
+    expect(getCookie('csrf')).toEqual(null);
+  });
+});
+
+describe('cookies are set', () => {
+  it('should return the asked cookie', () => {
+    Object.defineProperty(window.document, 'cookie', {
+      writable: true,
+      value: 'csrf=1234-5678-9101-1121-3141;anotherCookie=value',
+    });
+    expect(getCookie('csrf')).toEqual('1234-5678-9101-1121-3141');
+    expect(getCookie('anotherCookie')).toEqual('value');
+    expect(getCookie('thisCookieDoesNotExists')).toEqual(null);
+  });
 });

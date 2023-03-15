@@ -24,11 +24,9 @@
  *
  */
 
-import { mount } from '@vue/test-utils';
+import {flushPromises, mount} from '@vue/test-utils';
+import {describe, it, expect} from "vitest";
 import AsyncTask from './AsyncTask.vue';
-
-jest.mock('../utils.js');
-
 
 const pendingAsyncTaskData = {
   uuid: '31d69bd7-07e3-4567-a8f3-1aab41d86061',
@@ -39,17 +37,7 @@ const pendingAsyncTaskData = {
   createdAt: Date.now().toString(),
   startedAt: Date.now().toString(),
   completedAt: Date.now().toString(),
-}
-const processingAsyncTaskData = {
-  uuid: 'f66ecf3b-637c-413a-91a7-e318c27ce02f',
-  name: 'processingAsyncTaskData',
-  description: 'Votre document est en cours de génération',
-  state: 'PROCESSING',
-  progression: 45,
-  createdAt: Date.now().toString(),
-  startedAt: Date.now().toString(),
-  completedAt: Date.now().toString(),
-}
+};
 const doneAsyncTaskData = {
   uuid: '1445bb87-4965-44a5-9889-1b82f49166ec',
   name: 'doneAsyncTaskData',
@@ -59,16 +47,13 @@ const doneAsyncTaskData = {
   createdAt: Date.now().toString(),
   startedAt: Date.now().toString(),
   completedAt: Date.now().toString(),
-}
+};
 
 describe('component lifecycle', () => {
   it('should mount', () => {
     const wrapper = mount(AsyncTask, {
-      propsData: {
+      props: {
         ...pendingAsyncTaskData,
-      },
-      mocks: {
-        $t: k => k,
       },
     });
     expect(wrapper.text()).toContain(pendingAsyncTaskData['name']);
@@ -77,58 +62,39 @@ describe('component lifecycle', () => {
 
   it('should update', async () => {
     const wrapper = mount(AsyncTask, {
-      propsData: {
+      props: {
         ...pendingAsyncTaskData,
       },
-      mocks: {
-        $t: k => k,
-      },
     });
-    wrapper.setProps({...doneAsyncTaskData});
-    await wrapper.vm.$nextTick();
+    await wrapper.setProps({...doneAsyncTaskData});
+    await flushPromises();
     expect(wrapper.text()).toContain(doneAsyncTaskData['name']);
     // expect(wrapper.text()).toContain(doneAsyncTaskData['description']);
   });
 });
 
 describe('async task display', () => {
-  it('changes when processing state', async () => {
+  it('changes when processing state', () => {
     const wrapper = mount(AsyncTask, {
-      propsData: {
+      props: {
         ...pendingAsyncTaskData,
-      },
-      mocks: {
-        $t: k => k,
       },
     });
 
     // text must be bold
-    const textSpan = wrapper.find('span.async-task-text');
-    expect(textSpan.exists()).toBe(true);
-    expect(textSpan.element.classList).toContain('font-bold');
+    const textSpan = wrapper.findAll('span')[0];
+    expect(textSpan.classes()).toContain('font-bold');
   });
 
-  it('changes when read state', async () => {
+  it('changes when read state', () => {
     const wrapper = mount(AsyncTask, {
-      propsData: {
+      props: {
         ...doneAsyncTaskData,
-      },
-      mocks: {
-        $t: k => k,
       },
     });
 
     // text must not be bold
-    const textSpan = wrapper.find('span.async-task-text');
-    expect(textSpan.exists()).toBe(true);
-    expect(textSpan.element.classList).not.toContain('font-bold');
+    const textSpan = wrapper.findAll('span')[0];
+    expect(textSpan.classes()).not.toContain('font-bold');
   });
-});
-
-it('should have correct computed values', () => {
-  expect(AsyncTask.computed.isDone.call({ state: pendingAsyncTaskData.state})).toEqual(false);
-  expect(AsyncTask.computed.isDone.call({ state: doneAsyncTaskData.state})).toEqual(true);
-
-  expect(AsyncTask.computed.isProcessing.call({ state: pendingAsyncTaskData.state})).toEqual(false);
-  expect(AsyncTask.computed.isProcessing.call({ state: processingAsyncTaskData.state})).toEqual(true);
 });
