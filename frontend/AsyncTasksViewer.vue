@@ -72,7 +72,8 @@
         {{ $t('async_tasks_viewer.no_results') }}
       </li>
       <li
-          v-if="loading" class="progress"
+          v-if="loading"
+          class="progress"
       >
         <div
             class="progress-bar progress-bar-striped active"
@@ -103,12 +104,21 @@
   </li>
 </template>
 
-<script>
-import AsyncTask from './components/AsyncTask';
+<script lang="ts">
+import AsyncTask from './components/AsyncTask.vue';
+import {defineComponent} from "vue";
+import type {EntriesResponse, Entry} from "./interfaces";
+import type jQuery from "jquery";
 
-export default {
+declare global {
+  interface Window {
+    jQuery: typeof jQuery;
+  }
+}
+
+export default defineComponent({
   name: 'AsyncTasksViewer',
-  components: { AsyncTask },
+  components: {AsyncTask},
   props: {
     url: {
       type: String,
@@ -125,54 +135,65 @@ export default {
   },
   data() {
     return {
-      asyncTasks: [],
+      asyncTasks: [] as Entry[],
       hasNextPage: false,
       pageSize: this.limit,
       error: '',
       loading: true,
       pendingAsyncTasksCount: 0,
+      timer: 0,
     };
   },
-  async mounted() {
-    await this.fetchAsyncTasks();
-    let interval = this.interval;
-    if (this.pendingAsyncTasksCount > 0) {
-      // in case there is actual pending async task, set the interval to 5 seconds
-      interval = 5;
-    }
-    this.timer = setInterval(this.fetchAsyncTasks, interval * 1000);
-    // This next line let the dropdown menu open after clicking inside it. See the bootstrap source code here:
+  mounted() {
+    void this.fetchAsyncTasks();
+    // This next line lets the dropdown menu open after clicking inside it. See the bootstrap source code here:
     // https://github.com/twbs/bootstrap/blob/0b9c4a4007c44201dce9a6cc1a38407005c26c86/js/dropdown.js#L160
-    jQuery(document).on('click.bs.dropdown.data-api', '.async-tasks-dropdown', e => e.stopPropagation());
-    jQuery(document).on('AsyncTasksViewer:fetchAsyncTasks', () => this.fetchAsyncTasks());
+    window.jQuery(document).on('click.bs.dropdown.data-api', '.async-tasks-dropdown', (e: Event) => e.stopPropagation());
+    window.jQuery(document).on('AsyncTasksViewer:fetchAsyncTasks', () => void this.fetchAsyncTasks());
   },
   methods: {
+    refreshTimer: function () {
+      let interval = this.interval;
+      if (this.pendingAsyncTasksCount > 0) {
+        // in case there is actual pending async task, set the interval to 5 seconds
+        interval = 5;
+      }
+      window.clearTimeout(this.timer);
+      this.timer = window.setTimeout(() => {
+        void this.fetchAsyncTasks();
+      }, interval * 1000);
+    },
     fetchAsyncTasks: async function () {
       try {
         const response = await fetch(`${this.url}?limit=${this.pageSize}`);
-        const newAsyncTasks = await response.json();
-        this.asyncTasks = newAsyncTasks.results;
-        this.hasNextPage = !!newAsyncTasks.next;
-        this.pendingAsyncTasksCount = newAsyncTasks.pending_count;
-      } catch (error) {
-        this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${error.statusText} )`;
+        if (response.status >= 200 && response.status < 300) {
+          const newAsyncTasks = await response.json() as EntriesResponse;
+          this.asyncTasks = newAsyncTasks.results;
+          this.hasNextPage = !!newAsyncTasks.next;
+          this.pendingAsyncTasksCount = newAsyncTasks.pending_count;
+          this.refreshTimer();
+        } else {
+          this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${response.statusText} )`;
+        }
+      } catch (e) {
+        this.error = `${this.$t('async_tasks_viewer.error_fetch_async_tasks')} ( ${(e as Error).message} )`;
       } finally {
         this.loading = false;
       }
     },
     /**
      * We use the ?limit to get new tasks when clicking on the 'Load more' button as we need to keep all the previous
-     * tasks and add the new ones. All this will be override by the setInterval that fetch all the async tasks if we
+     * tasks and add the new ones. All this will be overriden by the setInterval that fetch all the async tasks if we
      * use the ?offset. So it may generate a big request, but it is very unlikely.
      */
-    loadMore: function (e) {
-       e.stopPropagation();  // prevent the dropdown from closing
+    loadMore: async function (e: Event) {
+      e.stopPropagation();  // prevent the dropdown from closing
       this.loading = true;
       this.pageSize += this.limit;
-      this.fetchAsyncTasks();
+      await this.fetchAsyncTasks();
     },
   },
-};
+});
 </script>
 
 <style lang="scss">
@@ -183,6 +204,7 @@ export default {
     max-height: 320px;
     min-width: 320px;
   }
+
   .alert.alert-warning {
     margin-top: 20px;
   }
@@ -198,7 +220,8 @@ export default {
       color: #777;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
-    &::after {  // async tasks count
+
+    &::after { // async tasks count
       font-family: Arial sans-serif;
       font-size: 0.8em;
       font-weight: 700;
@@ -219,11 +242,13 @@ export default {
       color: #fff;
       z-index: 2;
     }
+
     &.show-count::after {
       transform: scale(1);
       opacity: 1;
     }
   }
+
   //-------------------------------------------------
 }
 </style>

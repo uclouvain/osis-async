@@ -90,7 +90,7 @@ Make the dependencies available:
 <link href="{% static 'osis_async/osis-async.css' %}" rel="stylesheet"/>
 
 <!-- This line must go at the end of the file -->
-<script type="text/javascript" src="{% static 'osis_async/osis-async.umd.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'osis_async/osis-async.umd.js' %}"></script>
 
 ```
 

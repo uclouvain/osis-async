@@ -24,23 +24,24 @@
  *
  */
 
-import { getCookie } from './utils.js';
+/* eslint-disable vue/prefer-import-from-vue */
+import {createApp} from '@vue/runtime-dom'; // so that it can be spied on
+import AsyncTasksViewer from './AsyncTasksViewer.vue';
+import {i18n} from './i18n';
 
-describe('cookies are not set', () => {
-  it('should return null', () => {
-    delete window.document.cookie;
-    expect(getCookie('csrf')).toEqual(null);
-  });
-});
+interface Props extends Record<string, unknown> {
+  url: string,
+  interval?: number,
+  limit?: number,
+}
 
-describe('cookies are set', () => {
-  it('should return the asked cookie', () => {
-    Object.defineProperty(window.document, 'cookie', {
-      writable: true,
-      value: 'csrf=1234-5678-9101-1121-3141;anotherCookie=value',
-    });
-    expect(getCookie('csrf')).toEqual('1234-5678-9101-1121-3141');
-    expect(getCookie('anotherCookie')).toEqual('value');
-    expect(getCookie('thisCookieDoesNotExists')).toEqual(null);
-  });
+document.querySelectorAll<HTMLElement>('#async-tasks-viewer').forEach((elem) => {
+  const props: Props = {url: "", ...elem.dataset};
+  if (typeof elem.dataset.interval !== 'undefined') {
+    props.interval = Number.parseInt(elem.dataset.interval);
+  }
+  if (typeof elem.dataset.limit !== 'undefined') {
+    props.limit = Number.parseInt(elem.dataset.limit);
+  }
+  createApp(AsyncTasksViewer, props).use(i18n).mount(elem);
 });

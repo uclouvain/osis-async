@@ -24,18 +24,23 @@
  *
  */
 
-module.exports = {
-  stories: [
-    '../**/*.stories.@(js|jsx|ts|tsx)',
-  ],
-  addons: [
-    '@storybook/addon-essentials',
-  ],
-  framework: '@storybook/vue3',
-  core: {
-    'builder': '@storybook/builder-vite',
-  },
-  features: {
-    'storyStoreV7': true,
-  },
-};
+export type State = "PENDING" | "PROCESSING" | "DONE";
+
+export declare interface Entry {
+  uuid: string,
+  name: string,
+  description: string,
+  state: State,
+  progression: number,
+  created_at: string,
+  started_at: string | null,
+  completed_at: string | null,
+}
+
+export declare interface EntriesResponse {
+  count: number,
+  pending_count: number,
+  previous: string | null,
+  next: string | null,
+  results: Entry[],
+}

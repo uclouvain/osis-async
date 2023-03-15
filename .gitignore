@@ -130,6 +130,5 @@ dmypy.json
 
 # Frontend related
 /node_modules
-/osis_async/static/osis_async/osis-async.common.*
-/osis_async/static/osis_async/osis-async.umd.js*
+/frontend/node_modules
 /coverage
