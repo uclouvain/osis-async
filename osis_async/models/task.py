@@ -31,7 +31,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from base.models.person import Person
-from osis_async.models.enums import TaskStates
+from osis_async.models.enums import TaskState
 
 
 class AsyncTask(models.Model):
@@ -43,8 +43,8 @@ class AsyncTask(models.Model):
     description = models.TextField(_("Description"))
     state = models.CharField(
         _("State"),
-        choices=TaskStates.choices(),
-        default=TaskStates.PENDING.name,
+        choices=TaskState.choices(),
+        default=TaskState.PENDING.name,
         max_length=25,
     )
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="+", null=True)

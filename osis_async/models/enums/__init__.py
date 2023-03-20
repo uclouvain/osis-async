@@ -1,5 +1,5 @@
-from .task import TaskStates
+from .task import TaskState
 
 __all__ = [
-    "TaskStates",
+    "TaskState",
 ]

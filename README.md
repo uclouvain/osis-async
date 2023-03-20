@@ -67,11 +67,11 @@ It is the implementer role's to start and update its async tasks, you can use th
 ```python
 from django.utils.timezone import now
 from osis_async.utils import update_task
-from osis_async.models.enums.task import TaskStates
+from osis_async.models.enums.task import TaskState
 
-update_task(uuid, state=TaskStates.PROCESSING.name, started_at=now())
+update_task(uuid, state=TaskState.PROCESSING, started_at=now())
 update_task(uuid, progression=50)
-update_task(uuid, state=TaskStates.DONE.name, completed_at=now())
+update_task(uuid, state=TaskState.DONE, completed_at=now())
 ```
 
 # Integrate the front async component
