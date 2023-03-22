@@ -1,3 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`mounting app > with url  1`] = `"<div id=\\"async-tasks-viewer\\" data-url=\\"/api\\" data-v-app=\\"\\"><li id=\\"async-tasks-viewer\\" class=\\"dropdown\\"><a class=\\"dropdown-toggle\\" data-toggle=\\"dropdown\\" role=\\"button\\" aria-haspopup=\\"true\\" aria-expanded=\\"false\\"><div class=\\"download\\"><span class=\\"fas fa-tasks\\"></span></div></a><ul class=\\"dropdown-menu async-tasks-dropdown\\"><!----><li>No current tasks.</li><!----></ul></li></div>"`;

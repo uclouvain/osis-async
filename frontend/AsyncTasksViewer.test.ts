@@ -42,7 +42,7 @@ const jQueryMock = vi.fn(() => ({
 
 vi.stubGlobal('jQuery', jQueryMock);
 
-it('should mount', async () => {
+it('should mount and unmount', async () => {
   vi.useFakeTimers();
   fetchMock.reset().get('/?limit=15', {
     count: 1,
@@ -87,6 +87,10 @@ it('should mount', async () => {
   await flushPromises();
   expect(wrapper.findAllComponents({name: 'AsyncTask'})).toHaveLength(1);
   expect(wrapper.getComponent({name: 'AsyncTask'}).props('state')).toBe('DONE');
+  expect(vi.getTimerCount()).toBe(1);
+
+  wrapper.unmount();
+  expect(vi.getTimerCount()).toBe(0);
 });
 
 it('should display a response error', async () => {

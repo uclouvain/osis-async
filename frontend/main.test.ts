@@ -24,10 +24,9 @@
  *
  */
 
-import {describe, expect, test, vi} from 'vitest';
+import {expect, test, vi} from 'vitest';
 /* eslint-disable vue/prefer-import-from-vue */
 import * as exports from '@vue/runtime-dom';
-import AsyncTasksViewer from "./AsyncTasksViewer.vue";
 import fetchMock from "fetch-mock";
 import {createApp} from "vue";
 
@@ -43,34 +42,40 @@ fetchMock.reset().mock('path:/api', {
   previous: null,
 });
 
-describe('mounting app', () => {
-  const spy = vi.spyOn(exports, 'createApp').mockImplementation(createApp);
+const viewer = vi.fn();
+vi.mock('./AsyncTasksViewer.vue', () => ({
+  default: viewer,
+}));
 
-  test('with url ', async () => {
-    document.body.innerHTML = `<div id="async-tasks-viewer" data-url="/api"></div>`;
 
-    // Executes main file
-    await import('./main');
-    expect(document.body.innerHTML).toMatchSnapshot();
+const spy = vi.spyOn(exports, 'createApp').mockImplementation(createApp);
 
-    const pElement = document.querySelectorAll('[data-v-app]');
-    expect(pElement).toHaveLength(1);
+test('with url ', async () => {
+  document.body.innerHTML = `<div id="async-tasks-viewer" data-url="/api"></div>`;
 
-    expect(spy).toHaveBeenCalledWith(AsyncTasksViewer, {
-      url: '/api',
-    });
+  // Executes main file
+  await import('./main');
+
+  expect(document.querySelectorAll('[data-v-app]')).toHaveLength(1);
+
+  expect(spy).toHaveBeenCalledWith(viewer, {
+    url: '/api',
   });
+});
 
 
-  test('app with conversions', async () => {
-    vi.resetModules();
-    document.body.innerHTML = `<div id="async-tasks-viewer" data-url="/api" data-limit="3" data-interval="10"></div>`;
+test('app with conversions', async () => {
+  spy.mockClear();
+  vi.resetModules();
 
-    // Executes main file
-    await import('./main');
+  document.body.innerHTML = `<div id="async-tasks-viewer" data-url="/api" data-limit="3" data-interval="10"></div>`;
 
-    expect(spy).toHaveBeenCalledWith(AsyncTasksViewer, {
-      url: '/api',
-    });
+  // Executes main file
+  await import('./main');
+
+  expect(spy).toHaveBeenCalledWith(viewer, {
+    url: '/api',
+    limit: 3,
+    interval: 10,
   });
 });

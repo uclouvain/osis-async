@@ -144,6 +144,9 @@ export default defineComponent({
       timer: 0,
     };
   },
+  unmounted() {
+    window.clearTimeout(this.timer);
+  },
   mounted() {
     void this.fetchAsyncTasks();
     // This next line lets the dropdown menu open after clicking inside it. See the bootstrap source code here:
