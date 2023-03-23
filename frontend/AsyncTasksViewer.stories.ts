@@ -86,7 +86,9 @@ export const NoAsyncTasks: StoryFn<typeof AsyncTasksViewer> = () => {
     components: {AsyncTasksViewer},
     template: `
       <ul class="nav navbar-nav">
-      <AsyncTasksViewer url="/" />
+        <li id="async-tasks-viewer" class="dropdown">
+          <AsyncTasksViewer url="/" />
+        </li>
       </ul>`,
   };
 };
@@ -108,7 +110,9 @@ export const WithAsyncTasks: StoryFn<typeof AsyncTasksViewer> = () => {
     components: {AsyncTasksViewer},
     template: `
       <ul class="nav navbar-nav">
-      <AsyncTasksViewer url="/" :interval="10" />
+        <li id="async-tasks-viewer" class="dropdown">
+          <AsyncTasksViewer url="/" :interval="10" />
+        </li>
       </ul>
     `,
   };
@@ -134,12 +138,16 @@ export const EventFetchAsyncTasks: StoryFn<typeof AsyncTasksViewer> = () => {
   return {
     components: { AsyncTasksViewer },
     template: `
-      <ul class="nav navbar-nav">
-      <AsyncTasksViewer url="/" />
+      <div class="clearfix">
+        <ul class="nav navbar-nav clearfix">
+          <li id="async-tasks-viewer" class="dropdown">
+            <AsyncTasksViewer url="/" />
+          </li>
+        </ul>
+      </div>
       <button onclick="let customEvent=new CustomEvent('AsyncTasksViewer:fetchAsyncTasks'); document.dispatchEvent(customEvent); ">
         Refresh via custom event
       </button>
-      </ul>
     `,
   };
 };

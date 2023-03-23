@@ -24,84 +24,79 @@
   -
   -->
 <template>
-  <li
-      id="async-tasks-viewer"
-      class="dropdown"
+  <a
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false"
   >
-    <a
-        class="dropdown-toggle"
-        data-toggle="dropdown"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded="false"
+    <div
+        class="download"
+        :data-count="pendingAsyncTasksCount"
+        :class="{'show-count': pendingAsyncTasksCount }"
+    >
+      <span class="fas fa-tasks" />
+    </div>
+  </a>
+  <ul
+      class="dropdown-menu async-tasks-dropdown"
+  >
+    <li v-if="error">
+      <div
+          class="alert alert-warning"
+          role="alert"
+      >
+        {{ error }}
+      </div>
+    </li>
+    <AsyncTask
+        v-for="asyncTask in asyncTasks"
+        :key="asyncTask.uuid"
+        :uuid="asyncTask.uuid"
+        :name="asyncTask.name"
+        :description="asyncTask.description"
+        :progression="asyncTask.progression"
+        :state="asyncTask.state"
+        :created-at="asyncTask.created_at"
+        :started-at="asyncTask.started_at"
+        :completed-at="asyncTask.completed_at"
+    />
+    <li
+        v-if="!loading && !asyncTasks.length"
+    >
+      {{ $t('async_tasks_viewer.no_results') }}
+    </li>
+    <li
+        v-if="loading"
+        class="progress"
     >
       <div
-          class="download"
-          :data-count="pendingAsyncTasksCount"
-          :class="{'show-count': pendingAsyncTasksCount }"
+          class="progress-bar progress-bar-striped active"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: 100%"
       >
-        <span class="fas fa-tasks" />
-      </div>
-    </a>
-    <ul
-        class="dropdown-menu async-tasks-dropdown"
-    >
-      <li v-if="error">
-        <div
-            class="alert alert-warning"
-            role="alert"
-        >
-          {{ error }}
-        </div>
-      </li>
-      <AsyncTask
-          v-for="asyncTask in asyncTasks"
-          :key="asyncTask.uuid"
-          :uuid="asyncTask.uuid"
-          :name="asyncTask.name"
-          :description="asyncTask.description"
-          :progression="asyncTask.progression"
-          :state="asyncTask.state"
-          :created-at="asyncTask.created_at"
-          :started-at="asyncTask.started_at"
-          :completed-at="asyncTask.completed_at"
-      />
-      <li
-          v-if="!loading && !asyncTasks.length"
-      >
-        {{ $t('async_tasks_viewer.no_results') }}
-      </li>
-      <li
-          v-if="loading"
-          class="progress"
-      >
-        <div
-            class="progress-bar progress-bar-striped active"
-            role="progressbar"
-            aria-valuenow="100"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style="width: 100%"
-        >
-          <span class="sr-only">
-            {{ $t('async_tasks_viewer.load_more') }}
-          </span>
-        </div>
-      </li>
-      <li
-          v-else-if="hasNextPage"
-          class="text-center"
-      >
-        <button
-            type="button"
-            class="btn btn-link"
-            @click="loadMore"
-        >
+        <span class="sr-only">
           {{ $t('async_tasks_viewer.load_more') }}
-        </button>
-      </li>
-    </ul>
-  </li>
+        </span>
+      </div>
+    </li>
+    <li
+        v-else-if="hasNextPage"
+        class="text-center"
+    >
+      <button
+          type="button"
+          class="btn btn-link"
+          @click="loadMore"
+      >
+        {{ $t('async_tasks_viewer.load_more') }}
+      </button>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
@@ -143,6 +138,9 @@ export default defineComponent({
       pendingAsyncTasksCount: 0,
       timer: 0,
     };
+  },
+  unmounted() {
+    window.clearTimeout(this.timer);
   },
   mounted() {
     void this.fetchAsyncTasks();
