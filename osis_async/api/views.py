@@ -36,7 +36,7 @@ from rest_framework.settings import api_settings
 from osis_async.api.serializers import AsyncTaskSerializer
 from osis_async.api.utils import CorsAllowOriginMixin
 from osis_async.models import AsyncTask
-from osis_async.models.enums import TaskStates
+from osis_async.models.enums import TaskState
 
 
 class AsyncTaskListView(CorsAllowOriginMixin, generics.ListAPIView):
@@ -52,7 +52,7 @@ class AsyncTaskListView(CorsAllowOriginMixin, generics.ListAPIView):
     def get_paginated_response(self, data):
         pending_count = (
             self.get_queryset()
-            .filter(state__in=[TaskStates.PROCESSING.name, TaskStates.PENDING.name])
+            .filter(state__in=[TaskState.PROCESSING.name, TaskState.PENDING.name])
             .count()
         )
         return Response(OrderedDict([

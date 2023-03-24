@@ -30,6 +30,9 @@ msgstr "Description"
 msgid "Done"
 msgstr "Effectué"
 
+msgid "Error"
+msgstr "Erreur"
+
 msgid "In percentage"
 msgstr "En pourcentage"
 
@@ -57,8 +60,9 @@ msgstr "Etat"
 msgid ""
 "The Time To Live is the duration, in minutes, that the instance of a task "
 "will have to be completed. Pass this time, the task will be stop and errored."
-msgstr "La durée de vie est la durée, en minutes, que l'instance d'une tâche "
-"devra être terminée. Passez cette durée, la tâche sera arrêtée et erronée."
+msgstr ""
+"La durée de vie est la durée, en minutes, que l'instance d'une tâche devra "
+"être terminée. Passez cette durée, la tâche sera arrêtée et erronée."
 
 msgid ""
 "The task is being processed. You can keep this window open to see the "

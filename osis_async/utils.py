@@ -26,14 +26,14 @@
 from datetime import datetime
 
 from osis_async.models import AsyncTask
-from osis_async.models.enums import TaskStates
+from osis_async.models.enums import TaskState
 
 
 def update_task(
     uuid,
     progression: int = None,
     description: str = None,
-    state: TaskStates = None,
+    state: TaskState = None,
     started_at: datetime = None,
     completed_at: datetime = None,
 ):
