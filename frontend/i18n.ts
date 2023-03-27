@@ -25,36 +25,13 @@
  */
 
 import {createI18n} from 'vue-i18n';
+import fr from "./locales/fr";
+import en from "./locales/en";
 
-const messages = {
-  en: {
-    async_tasks_viewer: {
-      error_fetch_async_tasks: 'An error occurred while fetching tasks, please try again later.',
-      load_more: 'Load more',
-      loading: 'Loading',
-      no_results: 'No current tasks.',
-    },
-    async_task: {
-      created_at: 'created at',
-      started_at: 'started at',
-      completed_at: 'completed at',
-    },
-  },
-  'fr-be': {
-    async_tasks_viewer: {
-      error_fetch_async_tasks: 'Une erreur s\'est produite lors de la récupération des tâches, veuillez réessayer plus tard.',
-      load_more: 'Afficher plus',
-      loading: 'Chargement',
-      no_results: 'Aucune tâche en cours.',
-    },
-    async_task: {
-      created_at: 'demandée le',
-      started_at: 'débutée le',
-      completed_at: 'terminée le',
-    },
-  },
-};
 export const i18n = createI18n({
   locale: document.documentElement.lang || 'en',
-  messages,
+  messages: {
+    en,
+    fr,
+  },
 });
