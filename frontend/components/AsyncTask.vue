@@ -55,7 +55,7 @@
               {{ $t('async_task.error_task') }}
             </template>
             <template v-if="!isInError">
-               {{ computedProgression }}%
+              {{ computedProgression }}%
             </template>
           </div>
         </div>
