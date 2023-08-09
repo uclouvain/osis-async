@@ -35,5 +35,6 @@ export default {
     created_at: 'created at',
     started_at: 'started at',
     completed_at: 'completed at',
+    error_task: 'An error occurred while running task',
   },
 };

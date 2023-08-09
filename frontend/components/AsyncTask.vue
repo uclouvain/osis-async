@@ -6,7 +6,7 @@
   -   The core business involves the administration of students, teachers,
   -   courses, programs and so on.
   -
-  -   Copyright (C) 2015-2021 Université catholique de Louvain (http://www.uclouvain.be)
+  -   Copyright (C) 2015-2023 Université catholique de Louvain (http://www.uclouvain.be)
   -
   -   This program is free software: you can redistribute it and/or modify
   -   it under the terms of the GNU General Public License as published by
@@ -44,14 +44,19 @@
         <div class="progress">
           <div
               class="progress-bar progress-bar-striped"
-              :class="{ 'active': isProcessing, 'progress-bar-success': isDone }"
+              :class="{ 'active': isProcessing, 'progress-bar-success': isDone, 'progress-bar-danger': isInError }"
               role="progressbar"
-              :aria-valuenow="progression"
+              :aria-valuenow="computedProgression"
               aria-valuemin="0"
               aria-valuemax="100"
-              :style="{ width: progression + '%' }"
+              :style="{ width: computedProgression + '%' }"
           >
-            {{ progression }}%
+            <template v-if="isInError">
+              {{ $t('async_task.error_task') }}
+            </template>
+            <template v-if="!isInError">
+              {{ computedProgression }}%
+            </template>
           </div>
         </div>
       </div>
@@ -105,6 +110,12 @@ export default defineComponent({
     },
     isDone: function () {
       return this.state === 'DONE';
+    },
+    isInError: function () {
+      return this.state === 'ERROR';
+    },
+    computedProgression: function () {
+      return (this.isInError) ? 100: this.progression;
     },
     asyncDate: function () {
       if (this.completedAt) {

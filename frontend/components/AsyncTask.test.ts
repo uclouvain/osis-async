@@ -6,7 +6,7 @@
  *   The core business involves the administration of students, teachers,
  *   courses, programs and so on.
  *
- *   Copyright (C) 2015-2021 Université catholique de Louvain (http://www.uclouvain.be)
+ *   Copyright (C) 2015-2023 Université catholique de Louvain (http://www.uclouvain.be)
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -44,6 +44,16 @@ const doneAsyncTaskData = {
   description: '<a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank">Votre document est disponible ici</a>',
   state: 'DONE',
   progression: 100,
+  createdAt: Date.now().toString(),
+  startedAt: Date.now().toString(),
+  completedAt: Date.now().toString(),
+};
+const errorAsyncTaskData = {
+  uuid: '1445bb87-4965-44a5-9889-1b82f49166ec',
+  name: 'errorAsyncTaskData',
+  description: '',
+  state: 'ERROR',
+  progression: 0,
   createdAt: Date.now().toString(),
   startedAt: Date.now().toString(),
   completedAt: Date.now().toString(),
@@ -96,5 +106,19 @@ describe('async task display', () => {
     // text must not be bold
     const textSpan = wrapper.findAll('span')[0];
     expect(textSpan.classes()).not.toContain('font-bold');
+  });
+});
+
+describe('async task display error', () => {
+  it('changes when task is in error', () => {
+    const wrapper = mount(AsyncTask, {
+      props: {
+        ...errorAsyncTaskData,
+      },
+    });
+
+    // progress bar must be in red
+    const progressBar = wrapper.find('.progress-bar');
+    expect(progressBar.classes()).toContain('progress-bar-danger');
   });
 });
