@@ -35,5 +35,6 @@ export default {
     created_at: 'demandée le',
     started_at: 'débutée le',
     completed_at: 'terminée le',
+    error_task: 'Une erreur s\'est produite lors de l\'exécution de la tâche.',
   },
 };
