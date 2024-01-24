@@ -23,6 +23,7 @@
 #    see http://www.gnu.org/licenses/.
 #
 # ##############################################################################
+import traceback
 from datetime import datetime
 
 from osis_async.models import AsyncTask
@@ -36,6 +37,7 @@ def update_task(
     state: TaskState = None,
     started_at: datetime = None,
     completed_at: datetime = None,
+    exception: Exception = None,
 ):
     task = AsyncTask.objects.get(uuid=uuid)
     if progression is not None:
@@ -48,4 +50,6 @@ def update_task(
         task.started_at = started_at
     if completed_at is not None:
         task.completed_at = completed_at
+    if exception is not None:
+        task.traceback = ''.join(traceback.format_exception(etype=None, value=exception, tb=exception.__traceback__))
     task.save()
