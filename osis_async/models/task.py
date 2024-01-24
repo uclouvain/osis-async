@@ -69,6 +69,7 @@ class AsyncTask(models.Model):
             MinValueValidator(0),
         ],
     )
+    traceback = models.TextField(_("Traceback"), default="")
 
     created_at = models.DateTimeField(_("Created at"), auto_now_add=True)
     started_at = models.DateTimeField(_("Started at"), editable=False, null=True)
