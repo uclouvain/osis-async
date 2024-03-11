@@ -26,21 +26,21 @@
 <template>
   <li class="async-task-dropdown-item container">
     <div class="row">
-      <div class="col-md-12 text-left">
+      <div class="col-12 text-left text-start">
         <span :class="{ 'font-bold': !isDone }">
           {{ name }}
         </span>
-        <span class="async-task-date pull-right">
+        <span class="async-task-date pull-right float-end">
           <em>{{ asyncDate }}</em>
         </span>
       </div>
-      <div class="col-md-12 text-left">
+      <div class="col-12 text-left text-start">
         <span
             class="async-task-text"
             v-html="description"
         />
       </div>
-      <div class="col-md-12">
+      <div class="col-12">
         <div class="progress">
           <div
               class="progress-bar progress-bar-striped"
