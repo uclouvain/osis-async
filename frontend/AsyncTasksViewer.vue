@@ -25,8 +25,11 @@
   -->
 <template>
   <a
-      class="dropdown-toggle"
+      class="dropdown-toggle nav-link"
       data-toggle="dropdown"
+      data-bs-toggle="dropdown"
+      data-bs-auto-close="outside"
+      href="#"
       role="button"
       aria-haspopup="true"
       aria-expanded="false"
@@ -40,7 +43,7 @@
     </div>
   </a>
   <ul
-      class="dropdown-menu async-tasks-dropdown"
+      class="dropdown-menu async-tasks-dropdown dropdown-menu-end w-md-container w-xl-container"
   >
     <li v-if="error">
       <div
