@@ -44,7 +44,7 @@
         <div class="progress">
           <div
               class="progress-bar progress-bar-striped"
-              :class="{ 'active': isProcessing, 'progress-bar-success': isDone, 'progress-bar-danger': isInError }"
+              :class="{ 'active': isProcessing, 'progress-bar-success bg-success': isDone, 'progress-bar-danger bg-danger': isInError }"
               role="progressbar"
               :aria-valuenow="computedProgression"
               aria-valuemin="0"
